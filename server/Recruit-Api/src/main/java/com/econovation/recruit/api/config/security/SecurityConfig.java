@@ -75,8 +75,10 @@ public class SecurityConfig {
                 // 따라서 스웨거용 인메모리 유저가 basic auth 필터를 통과해서 들어오더라도
                 // ( jwt 필터나 , basic auth 필터의 순서는 상관이없다.) --> 왜냐면 jwt는 토큰 여부 파악만하고 있으면 검증이고 없으면 넘김.
                 // 내부 소스까지 실행을 못함. 권한 문제 때문에.
-                .mvcMatchers(HttpMethod.DELETE, "/api/v1//interviewers/*", "/api/v1/applicants/{applicants-id}/status")
-                .hasAnyRole("OPERATION", "PRESIDENT")
+                .mvcMatchers(HttpMethod.DELETE, "/api/v1//interviewers/*")
+                .hasAnyRole("ROLE_OPERATION", "ROLE_PRESIDENT")
+                .mvcMatchers(HttpMethod.PATCH, "/api/v1/applicants/{applicant-id}/status")
+                .hasAnyRole("ROLE_OPERATION", "ROLE_PRESIDENT")
                 .anyRequest()
                 .hasAnyRole(RolePattern);
 
