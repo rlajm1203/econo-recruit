@@ -32,10 +32,19 @@ public class MongoAnswer extends MongoBaseTimeEntity {
 
     @TextIndexed private String qnaSearchIndex;
 
+    // 합,불 상태
+    @Field("status")
+    private ApplicantStatus applicantStatus;
+
+    public void changeStatus(String status){
+        this.applicantStatus = ApplicantStatus.findStatus(status);
+    }
+
     public MongoAnswer(String id, Integer year, Map<String, Object> qna) {
         this.id = id;
         this.year = year;
         this.qna = qna;
+        this.applicantStatus = ApplicantStatus.NONPASSED;
         this.qnaSearchIndex =
                 qna.values().stream().map(Object::toString).collect(Collectors.joining(" "));
     }
