@@ -17,6 +17,7 @@ public class CorsConfig implements WebMvcConfigurer {
         ArrayList<String> allowedOriginPatterns = new ArrayList<>();
         allowedOriginPatterns.add("https://recruit.econovation.kr");
         allowedOriginPatterns.add("https://auth.econovation.kr");
+        allowedOriginPatterns.add("http://211.188.51.50:80");
         if (!springEnvironmentHelper.isProdProfile()) {
             allowedOriginPatterns.add("http://localhost:3000");
             allowedOriginPatterns.add("http://localhost:6379");
