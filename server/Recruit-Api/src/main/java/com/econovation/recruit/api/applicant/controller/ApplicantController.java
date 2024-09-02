@@ -53,6 +53,9 @@ public class ApplicantController {
     @Value("${econovation.year}")
     private Integer year;
 
+    @Value("${econovation.recruit.period.passedDate}")
+    private String passedDate;
+
     @Operation(summary = "지원자가 지원서를 작성합니다.", description = "반환 값은 생성된 지원자의 ID입니다.")
     @ApiErrorExceptionsExample(CreateApplicantExceptionDocs.class)
     @XssProtected
@@ -142,8 +145,9 @@ public class ApplicantController {
     @TimeTrace
     @PostMapping("/applicants/mail")
     public ResponseEntity sendEmail(@RequestBody EmailSendDto emailSendDto) {
+        LocalDateTime passedDate = LocalDateTime.parse(this.passedDate);
         commonsEmailSender.send(
-                emailSendDto.getEmail(), emailSendDto.getApplicantId(), LocalDateTime.now());
+                emailSendDto.getEmail(), emailSendDto.getApplicantId(), passedDate);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
