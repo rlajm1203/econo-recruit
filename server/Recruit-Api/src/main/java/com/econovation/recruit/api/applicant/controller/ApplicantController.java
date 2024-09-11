@@ -145,10 +145,10 @@ public class ApplicantController {
     }
 
     @Operation(summary = "지원자의 합/불 상태를 변경합니다.")
-    @PatchMapping("/applicants/{applicant-id}/status")
+    @PatchMapping("/applicants/{applicant-id}/state")
     public ResponseEntity<String> updateStatus(@PathVariable("applicant-id") String applicantId,
-                                       @RequestParam("afterStatus") String afterStatus){
-        String status = answerCommandService.execute(applicantId, afterStatus);
+                                       @RequestParam("afterState") String afterState){
+        String status = answerCommandService.execute(applicantId, afterState);
         return new ResponseEntity(status, HttpStatus.OK);
     }
 }

@@ -8,5 +8,5 @@ import java.util.UUID;
 public interface ApplicantCommandUseCase {
     UUID execute(Map<String, Object> blocks);
 
-    String execute(String applicantId, String status);
+    String execute(String applicantId, String state);
 }
