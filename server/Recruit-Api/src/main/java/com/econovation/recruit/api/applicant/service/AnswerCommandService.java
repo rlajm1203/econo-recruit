@@ -2,16 +2,13 @@ package com.econovation.recruit.api.applicant.service;
 
 import com.econovation.recruit.api.applicant.usecase.ApplicantCommandUseCase;
 import com.econovation.recruitdomain.common.aop.domainEvent.Events;
-import com.econovation.recruitdomain.domains.applicant.domain.ApplicantStatus;
-import com.econovation.recruitdomain.domains.applicant.domain.ApplicantStatus.*;
+import com.econovation.recruitdomain.domains.applicant.domain.ApplicantStates;
 import com.econovation.recruitdomain.domains.applicant.domain.MongoAnswer;
 import com.econovation.recruitdomain.domains.applicant.domain.MongoAnswerAdaptor;
 import com.econovation.recruitdomain.domains.applicant.event.domainevent.ApplicantRegisterEvent;
 import java.util.Map;
 import java.util.UUID;
 
-import com.econovation.recruitdomain.domains.applicant.exception.ApplicantNotFoundException;
-import com.slack.api.model.admin.App;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -29,7 +26,7 @@ public class AnswerCommandService implements ApplicantCommandUseCase {
     @Transactional
     public UUID execute(Map<String, Object> qna) {
         UUID id = UUID.randomUUID();
-        ApplicantStatus nonPassed = ApplicantStatus.NONPASSED;
+        ApplicantStates nonPassed = ApplicantStates.NONPASSED;
         MongoAnswer answer = MongoAnswer.builder().id(id.toString()).qna(qna).year(year).applicantStatus(nonPassed).build();
         //        학번으로 중복 체크
         //        validateRegisterApplicant(qna);
@@ -47,10 +44,10 @@ public class AnswerCommandService implements ApplicantCommandUseCase {
 
     @Override
     @Transactional
-    public String execute(String applicantId, String status) {
+    public String execute(String applicantId, String state) {
         MongoAnswer answer = answerAdaptor.findById(applicantId).get();
-        answer.changeStatus(status);
+        answer.changeState(state);
         answerAdaptor.save(answer);
-        return answer.getApplicantStatus().getStatus();
+        return answer.getApplicantState().getStatus();
     }
 }
