@@ -1,6 +1,6 @@
 package com.econovation.recruitdomain.domains.applicant.domain;
 
-import com.econovation.recruitdomain.domains.applicant.exception.ApplicantWrongStatusException;
+import com.econovation.recruitdomain.domains.applicant.exception.ApplicantWrongStateException;
 import lombok.Getter;
 
 import java.util.Arrays;
@@ -20,7 +20,7 @@ public enum ApplicantStates {
         return Arrays.stream(ApplicantStates.values())
                 .filter(s -> s.getStatus().equals(status))
                 .findFirst()
-                .orElseThrow(ApplicantWrongStatusException::new);
+                .orElseThrow(ApplicantWrongStateException::new);
     }
 
 }
