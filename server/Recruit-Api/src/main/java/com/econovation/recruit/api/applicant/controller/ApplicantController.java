@@ -150,6 +150,6 @@ public class ApplicantController {
                                                @RequestParam("afterState") String afterState){
 //        commandGateway.send(new UpdateApplicantStateCommand(applicantId, afterState));
         String state = applicantCommandUseCase.execute(applicantId, afterState);
-        return new ResponseEntity(state, HttpStatus.OK);
+        return new ResponseEntity(state,HttpStatus.OK);
     }
 }
