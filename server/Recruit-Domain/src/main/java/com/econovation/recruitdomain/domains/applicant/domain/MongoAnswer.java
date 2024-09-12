@@ -37,11 +37,11 @@ public class MongoAnswer extends MongoBaseTimeEntity {
     private ApplicantState applicantState;
 
     public void pass(){
-        this.applicantState.nextState();
+        this.applicantState.nextPassState();
     }
 
     public void nonPass(){
-        this.applicantState.prevState();
+        this.applicantState.prevPassState();
     }
 
     public MongoAnswer(String id, Integer year, Map<String, Object> qna) {
