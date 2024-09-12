@@ -14,7 +14,6 @@ public enum ApplicantStateEvents {
 
 
     private String event;
-    private String applicantId;
 
     ApplicantStateEvents(String event){ this.event = event; }
 
